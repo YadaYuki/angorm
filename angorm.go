@@ -9,6 +9,10 @@ import (
 type AngormPlugin struct {
 }
 
+func NewPlugin() *AngormPlugin {
+	return &AngormPlugin{}
+}
+
 func (p *AngormPlugin) Name() (name string) {
 	return ""
 }
