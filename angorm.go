@@ -1,27 +1,22 @@
 package angorm
 
 import (
-	"fmt"
-
 	"gorm.io/gorm"
 )
 
 type Angorm struct {
+	*gorm.DB
 }
 
 func New() *Angorm {
 	return &Angorm{}
 }
 
-func (p *Angorm) Name() (name string) {
+func (angorm *Angorm) Name() (name string) {
 	return ""
 }
 
-func (p *Angorm) Initialize(db *gorm.DB) error {
-	db.Callback().Query().Register("printValue", printValue)
-	return nil
-}
-
-func printValue(db *gorm.DB) {
-	fmt.Println(db.Statement.ReflectValue)
+func (angorm *Angorm) Initialize(db *gorm.DB) error {
+	angorm.DB = db
+	return registerCallback(db)
 }
