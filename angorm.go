@@ -6,18 +6,18 @@ import (
 	"gorm.io/gorm"
 )
 
-type AngormPlugin struct {
+type Angorm struct {
 }
 
-func NewPlugin() *AngormPlugin {
-	return &AngormPlugin{}
+func New() *Angorm {
+	return &Angorm{}
 }
 
-func (p *AngormPlugin) Name() (name string) {
+func (p *Angorm) Name() (name string) {
 	return ""
 }
 
-func (p *AngormPlugin) Initialize(db *gorm.DB) error {
+func (p *Angorm) Initialize(db *gorm.DB) error {
 	db.Callback().Query().Register("printValue", printValue)
 	return nil
 }
