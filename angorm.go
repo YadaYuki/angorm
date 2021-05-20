@@ -18,5 +18,5 @@ func (angorm *Angorm) Name() (name string) {
 
 func (angorm *Angorm) Initialize(db *gorm.DB) error {
 	angorm.DB = db
-	return nil
+	return registerCallback(db)
 }
