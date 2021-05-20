@@ -7,18 +7,20 @@ import (
 )
 
 type Angorm struct {
+	Db *gorm.DB
 }
 
 func New() *Angorm {
 	return &Angorm{}
 }
 
-func (p *Angorm) Name() (name string) {
+func (angorm *Angorm) Name() (name string) {
 	return ""
 }
 
-func (p *Angorm) Initialize(db *gorm.DB) error {
-	db.Callback().Query().Register("printValue", printValue)
+func (angorm *Angorm) Initialize(db *gorm.DB) error {
+	angorm.Db = db
+	angorm.Db.Callback().Query().Register("printValue", printValue)
 	return nil
 }
 
